@@ -1,6 +1,5 @@
 // median of two sorted array
-//  Given an array Arr[] of N integers. Find the contiguous sub-array(containing at least one number) which has the maximum sum and return its sum
-//  print max sum that can be obtained from set of sub array
+
 #include <iostream>
 using namespace std;
 void print(int arr[], int size)
