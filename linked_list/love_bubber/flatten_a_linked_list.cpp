@@ -3,81 +3,74 @@ using namespace std;
 class Node{
     public:
       int data;
-      Node* next;
+      Node* down;
+      Node* right;
     Node(int data){
         this->data=data;
-        next = NULL;
+        down = NULL;
+        right=NULL;
     }  
 };
 void print(Node* head){
     while(head != NULL){
         cout<<head->data<<" ";
-        head = head ->next ;
+        head = head ->down ;
     }
 }
 
 void insertAtEnd(Node* head,int data){
      Node* node=new Node(data);
-    while (head->next !=NULL)
+    while (head->down !=NULL)
     {
-        head=head->next;
+        head=head->down;
     }
-    head->next=node;
+    head->down=node;
     
 }
 
-Node* ans(Node* firstHead,Node* secondHead){
-
-    
-    Node* curr1=firstHead;
-    Node* next1=curr1->next;
-    Node* curr2=secondHead;
-    Node* next2=curr2->next;
-    //if only one element is present in list
-    if(firstHead->next ==NULL){
-        firstHead->next=secondHead;
-        return firstHead;
-    }
-    while (curr2 != NULL  && next1 !=NULL)
-    {
-        if((curr2->data >= curr1->data) && (curr2->data <= next1->data)){
-            curr1->next=curr2;
-            next2=curr2->next;
-            curr2->next=next1;
-            curr1=curr2;
-            curr2=next2;
-        }else{
-            curr1=next1;
-            next1=next1->next;
-            if(next1 ==NULL){
-                curr1->next=curr2;
-                return firstHead;
-            }
-        }
-    }
-    return firstHead;
-    
-}
-Node *mergeTwoSortedList(Node *&firstHead, Node *&secondhead)
+Node* merge(Node* a, Node* b)
 {
-    if (firstHead == NULL)
-    {
-        return secondhead;
+ 
+    // If first linked list is empty then second
+    // is the answer
+    if (a == NULL)
+        return b;
+ 
+    // If second linked list is empty then first
+    // is the result
+    if (b == NULL)
+        return a;
+ 
+    // Compare the data members of the two linked
+    // lists and put the larger one in the result
+    Node* result;
+ 
+    if (a->data < b->data) {
+        result = a;
+        result->down = merge(a->down, b);
     }
-    if (secondhead == NULL)
-    {
-        return firstHead;
+ 
+    else {
+        result = b;
+        result->down = merge(a, b->down);
     }
-    if (firstHead->data <=secondhead->data)
-    {
-        return ans(firstHead,secondhead);
-    }else{
-        return ans(secondhead,firstHead);
-    }
-
+    result->right = NULL;
+    return result;
 }
-void flattenLinkedList(Node* head){
-    
+Node* flattenLinkedList(Node* root){
+    // Base Cases
+    if (root == NULL || root->right == NULL)
+        return root;
+ 
+    // Recur for list on right
+    root->right = flattenLinkedList(root->right);
+ 
+    // Now merge
+    root = merge(root, root->right);
+ 
+    // Return the root
+    // it will be in turn merged with its left
+    return root;
 }
 
 int main(){
