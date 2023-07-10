@@ -16,6 +16,9 @@
         "utility": "cpp",
         "variant": "cpp",
         "vector": "cpp",
-        "unordered_map": "cpp"
+        "unordered_map": "cpp",
+        "string": "cpp",
+        "unordered_set": "cpp",
+        "string_view": "cpp"
     }
 }
