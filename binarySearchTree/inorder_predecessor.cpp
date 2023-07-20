@@ -77,6 +77,8 @@ void takeInput(Node *&root)
         cin >> data;
     }
 }
+
+//1 add to vector using inorder. and beofre key is pre and afterkey is successor
 void inorderPreSuc(Node *root, Node* &pre,Node* &succ,int k)
 {
     
@@ -116,6 +118,7 @@ void inorderPreSuc(Node *root, Node* &pre,Node* &succ,int k)
         return inorderPreSuc(root->right,pre,succ,k);
     }
 }
+//second ans first use while loop until key is found , then move to left one and right until it is null.  same for succ ,first go to right and left until null and save ans before moving.
 int main()
 {
     Node *root = NULL;
