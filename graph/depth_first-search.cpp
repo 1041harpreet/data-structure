@@ -1,7 +1,7 @@
 #include <list>
 #include <unordered_map>
 #include <vector>
-
+using namespace std;
 void makeAdjList(unordered_map<int, list<int>> &adjList,
                  vector<vector<int>> &edges) {
   for (int i = 0; i < edges.size(); i++) {
