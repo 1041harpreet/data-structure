@@ -23,8 +23,6 @@ int maxSum(int arr[], int size)
         {
             cur_sum=0;
         }
-        
-       
     }
     return max_sum;
 }
